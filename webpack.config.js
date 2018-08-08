@@ -19,18 +19,15 @@ module.exports = {
         'member':['./client/scripts/member.js']
     },
     output: {
-        path: path.join(__dirname, 'tmp/'),  //这儿好像没起作用
+        path: path.join(__dirname, 'build/'),  //这儿好像没起作用
         filename: '[name].js', //输出文件名，[name].js默认是main.js。如果指定则是指定名
-        publicPath: '/tmp/', //这个一定得注意，之前我写tmp/，导致一直找不到js文件路劲
+        publicPath: '/build/', //这个一定得注意，之前我写build/，导致一直找不到js文件路劲
         chunkFilename: "[chunkhash].js"   //这个好像没起作用，应该研究用处和区别
     },
     module: {
         rules:[
              {
                 test: /\.js|\.jsx$/,
-                // include: [
-                //     path.join(__dirname, 'client'),
-                // ],
                 exclude: [
                     path.resolve(__dirname, "node_modules")
                 ],

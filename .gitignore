@@ -1,1 +1,7 @@
-*.agdai
+bundle.js
+*.bundle.js
+node_modules
+.DS_Store
+package-lock.json
+tmp
+build
