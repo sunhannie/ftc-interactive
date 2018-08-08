@@ -1,0 +1,23 @@
+{
+  "name": "ftc-interactive",
+  "version": "1.0.0",
+  "description": "it is a perils of perception",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunhannie/ftc-interactive.git"
+  },
+  "keywords": [
+    "interactive",
+    "react"
+  ],
+  "author": "he huiyun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunhannie/ftc-interactive/issues"
+  },
+  "homepage": "https://github.com/sunhannie/ftc-interactive#readme"
+}
