@@ -1,25 +1,24 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin"); 
-const extractCSS = new ExtractTextPlugin('one.css'); 
+const ExtractTextPlugin = require("extract-text-webpack-plugin"); 
+
 const HtmlWebpackPlugin = require("html-webpack-plugin"); 
 // 清除目录等
 const cleanWebpackPlugin = require("clean-webpack-plugin");
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// const extractSass = new ExtractTextPlugin({
-//     filename: "[name].[contenthash].css",
-//     disable: process.env.NODE_ENV === "development"
-// });
+
 
 module.exports = {
     mode: "development", 
     devtool: 'cheap-module-eval-source-map',
     entry:
     {
-        'index':['./client/index.js'],
-        'signup':['./client/scripts/signup.js']
+        'index':['./client/index.js','./client/styles/index.scss'],  //.js扩展名可以不加,scss可以一起打包到index文档
+        'signup':['./client/scripts/signup.js'],
+
     },
     output: {
         path: path.resolve(__dirname, 'build/'),  //这儿好像没起作用
@@ -32,7 +31,7 @@ module.exports = {
              {
                 test: /\.js|\.jsx$/,
                 exclude: [
-                    path.resolve(__dirname, "node_modules")
+                    path.resolve(__dirname, "node_modules")  // 不检查node_modules下的js文件
                 ],
                 loader: "babel-loader",
                 options: {
@@ -45,9 +44,23 @@ module.exports = {
                     path.resolve(__dirname, "node_modules")
                 ],
                 loader: 'style-loader!css-loader?modules&importLoaders&localIdentName=[name]__[local]__[hash:base64:5]!sass-loader?sourceMap=true&sourceMapContents=true',
-                // use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
              
              },
+            //  {
+            //     resource: {
+            //         test: /\.scss$/,
+            //         or: [
+            //             path.join(__dirname, 'client', 'styles', 'index.scss')
+            //         ]
+            //     },
+            //     use: [ 
+            //         MiniCssExtractPlugin.loader,
+            //         'style-loader',
+            //         'css-loader',
+            //         'sass-loader'
+            //     ]
+            // },
+               
              {
                 test: /\.json?$/,
                 loader: 'json'
@@ -68,21 +81,26 @@ module.exports = {
                 exclude: [
                     path.resolve(__dirname, "node_modules")
                 ],
-                use: [
-                    {  
-                        loader: 'style-loader'   // 将 JS 字符串生成为 style 节点
-                    },
-                    {
-                        loader: 'css-loader',  // 将 CSS 转化成 CommonJS 模块
-                    },
-                    {
-                        loader: 'sass-loader',  // 将 Sass 编译成 CSS
-                        options: { 
-                            sourceMap:true  ,
-                            sourceMapContents:true
-                        }
-                    }
-                ]
+                // use: [
+                //     {  
+                //         loader: 'style-loader'   // 将 JS 字符串生成为 style 节点
+                //     },
+                //     {
+                //         loader: 'css-loader',  // 将 CSS 转化成 CommonJS 模块
+                //     },
+                //     {
+                //         loader: 'sass-loader',  // 将 Sass 编译成 CSS
+                //         options: { 
+                //             sourceMap:true  ,
+                //             sourceMapContents:true
+                //         }
+                //     },
+                    
+                // ]
+                use: ExtractTextPlugin.extract({
+                    fallback:"style-loader",
+                    use: ["css-loader", "sass-loader"]
+                })
             }
         ]  //end rules    
     },
@@ -102,7 +120,10 @@ module.exports = {
     plugins: [
         // 调用之前先清除
 	    // new cleanWebpackPlugin(["build"]),
-    //    extractCSS,
+      new ExtractTextPlugin('client/styles/index.css'),  // 分离css插件参数为提取出去的路径
+       new MiniCssExtractPlugin({
+        filename:'[name].css'
+       }),
        new HtmlWebpackPlugin({
            template:'./views/index.html',
            filename:'index.html',
@@ -111,7 +132,7 @@ module.exports = {
            inject: 'body'
        })
     ],
-    // watch: true ,//这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
+    watch: true ,//这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
 
      devServer: {

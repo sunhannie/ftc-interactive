@@ -19,6 +19,8 @@ class App extends React.Component {
         {/*<Nav />
         <Login />*/}
         start
+        <div><span>test</span></div>
+        <button>提交2</button>
       </div>
     );
   }
