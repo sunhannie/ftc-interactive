@@ -3,6 +3,8 @@ var path = require('path');
 
 var ExtractTextPlugin = require("extract-text-webpack-plugin"); 
 const extractCSS = new ExtractTextPlugin('one.css'); 
+const HtmlWebpackPlugin = require("html-webpack-plugin"); 
+
 
 // const extractSass = new ExtractTextPlugin({
 //     filename: "[name].[contenthash].css",
@@ -15,13 +17,12 @@ module.exports = {
     entry:
     {
         'index':['./client/index.js'],
-        'signup':['./client/scripts/signup.js'],
-        'member':['./client/scripts/member.js']
+        'signup':['./client/scripts/signup.js']
     },
     output: {
-        path: path.join(__dirname, 'build/'),  //这儿好像没起作用
+        path: path.resolve(__dirname, 'build/'),  //这儿好像没起作用
         filename: '[name].js', //输出文件名，[name].js默认是main.js。如果指定则是指定名
-        publicPath: '/build/', //这个一定得注意，之前我写build/，导致一直找不到js文件路劲
+        // publicPath: '/build/', //这个一定得注意，之前我写build/，导致一直找不到js文件路劲
         chunkFilename: "[chunkhash].js"   //这个好像没起作用，应该研究用处和区别
     },
     module: {
@@ -49,13 +50,6 @@ module.exports = {
                 test: /\.json?$/,
                 loader: 'json'
              },
-            //  {
-            //     test: /\.scss$/,
-            //     exclude: [
-            //         path.resolve(__dirname, "node_modules")
-            //     ],
-            //     loader: 'style-loader!css-loader!sass-loader?sourceMap=true&sourceMapContents=true'    //用此方法靠style type="text/css"引入
-            //  },
              {
                 test: /\.html$/,
                 use: [
@@ -78,10 +72,6 @@ module.exports = {
                     },
                     {
                         loader: 'css-loader',  // 将 CSS 转化成 CommonJS 模块
-                        // options: {
-                        //     modules: true,
-                        //     sourceMap: true   //添加了它会变成用外链引入，比如<link type="text/css" rel="stylesheet" href="blob:http://localhost:9000/d0adec7b-34ef-470b-bac1-9559f9f6eb5e">
-                        // }
                     },
                     {
                         loader: 'sass-loader',  // 将 Sass 编译成 CSS
@@ -95,8 +85,13 @@ module.exports = {
         ]  //end rules    
     },
      resolve: {
+        //  modules: [
+        //     "node_modules",
+        //     path.resolve(__dirname, "app")
+        // ],// 用于查找模块的目录
         alias: {
-            'react': path.join(__dirname,'node_modules','react')
+            'react': path.join(__dirname,'node_modules','react'),
+            "module": path.resolve(__dirname, "node_modules")
         },
         extensions: [".js", ".json", ".jsx", ".css", ".scss"],
     },
@@ -107,9 +102,40 @@ module.exports = {
     },
 
     plugins: [
-    //    extractSass
-       extractCSS
+    //    extractCSS,
+       new HtmlWebpackPlugin({
+           template:'./views/index.html',
+           filename:'index.html',
+           title:'测试',
+           chunks:['index'],
+           inject: 'body'
+       })
     ],
-    watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
+    // watch: true ,//这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
+
+     devServer: {
+        // proxy: { // proxy URLs to backend development server
+        // '/api': 'http://localhost:3000'
+        // },
+        host:'localhost',
+        port:3000,
+        contentBase: path.resolve(__dirname, 'build'), // 设置服务器访问的基本目录
+        historyApiFallback: true, // true for index.html upon 404, object for multiple paths
+        hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+        https: false, // true for self-signed, object for cert authority
+        noInfo: true, // only errors & warns on hot reload   
+    },
+    // 提取js，lib1名字可改
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				lib1: {
+					chunks: "initial",
+					name: "jquery",
+					enforce: true
+				}
+			}
+		}
+	}
 };
