@@ -4,6 +4,8 @@ var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin"); 
 const extractCSS = new ExtractTextPlugin('one.css'); 
 const HtmlWebpackPlugin = require("html-webpack-plugin"); 
+// 清除目录等
+const cleanWebpackPlugin = require("clean-webpack-plugin");
 
 
 // const extractSass = new ExtractTextPlugin({
@@ -22,7 +24,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build/'),  //这儿好像没起作用
         filename: '[name].js', //输出文件名，[name].js默认是main.js。如果指定则是指定名
-        // publicPath: '/build/', //这个一定得注意，之前我写build/，导致一直找不到js文件路劲
+        // publicPath: '/build/', //这个一定得注意，不加此句，加上html找不到
         chunkFilename: "[chunkhash].js"   //这个好像没起作用，应该研究用处和区别
     },
     module: {
@@ -85,10 +87,6 @@ module.exports = {
         ]  //end rules    
     },
      resolve: {
-        //  modules: [
-        //     "node_modules",
-        //     path.resolve(__dirname, "app")
-        // ],// 用于查找模块的目录
         alias: {
             'react': path.join(__dirname,'node_modules','react'),
             "module": path.resolve(__dirname, "node_modules")
@@ -102,6 +100,8 @@ module.exports = {
     },
 
     plugins: [
+        // 调用之前先清除
+	    // new cleanWebpackPlugin(["build"]),
     //    extractCSS,
        new HtmlWebpackPlugin({
            template:'./views/index.html',
@@ -115,9 +115,6 @@ module.exports = {
     
 
      devServer: {
-        // proxy: { // proxy URLs to backend development server
-        // '/api': 'http://localhost:3000'
-        // },
         host:'localhost',
         port:3000,
         contentBase: path.resolve(__dirname, 'build'), // 设置服务器访问的基本目录
@@ -127,15 +124,15 @@ module.exports = {
         noInfo: true, // only errors & warns on hot reload   
     },
     // 提取js，lib1名字可改
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				lib1: {
-					chunks: "initial",
-					name: "jquery",
-					enforce: true
-				}
-			}
-		}
-	}
+	// optimization: {
+	// 	splitChunks: {
+	// 		cacheGroups: {
+	// 			lib1: {
+	// 				chunks: "initial",
+	// 				name: "jquery",
+	// 				enforce: true
+	// 			}
+	// 		}
+	// 	}
+	// }
 };
