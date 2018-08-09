@@ -20,7 +20,7 @@ class App extends React.Component {
         <Login />*/}
         start
         <div><span>test</span></div>
-        <button>提交2</button>
+        <button>提交1</button>
       </div>
     );
   }

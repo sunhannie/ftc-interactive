@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 // 清除目录等
 const cleanWebpackPlugin = require("clean-webpack-plugin");
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');  //用法进一步研究
 
 
 
@@ -16,9 +16,9 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry:
     {
-        'index':['./client/index.js','./client/styles/index.scss'],  //.js扩展名可以不加,scss可以一起打包到index文档
+        'index':['./client/index.js','./client/styles/index.scss'],  //.js扩展名可以不加,scss可以一起打包到index文档。加上scss，ExtractTextPlugin才能生效
         'signup':['./client/scripts/signup.js'],
-
+        // 'css':['./client/styles/index.scss'] 不能单独写scss文件
     },
     output: {
         path: path.resolve(__dirname, 'build/'),  //这儿好像没起作用
@@ -44,27 +44,29 @@ module.exports = {
                     path.resolve(__dirname, "node_modules")
                 ],
                 loader: 'style-loader!css-loader?modules&importLoaders&localIdentName=[name]__[local]__[hash:base64:5]!sass-loader?sourceMap=true&sourceMapContents=true',
-             
+                // use: ExtractTextPlugin.extract({
+				// 	fallback: "style-loader",
+				// 	use: "css-loader",
+				// 	publicPath: "../" // css中的基础路径
+				// })
              },
-            //  {
-            //     resource: {
-            //         test: /\.scss$/,
-            //         or: [
-            //             path.join(__dirname, 'client', 'styles', 'index.scss')
-            //         ]
-            //     },
-            //     use: [ 
-            //         MiniCssExtractPlugin.loader,
-            //         'style-loader',
-            //         'css-loader',
-            //         'sass-loader'
-            //     ]
-            // },
                
              {
                 test: /\.json?$/,
                 loader: 'json'
              },
+            //  {
+			// 	test: /\.(png|jpg|gif)$/,
+			// 	use: [{
+			// 			// 需要下载file-loader和url-loader
+			// 			loader: "url-loader",
+			// 			options: {
+			// 				limit: 50,
+			// 				outputPath: "images" // 图片文件输出的文件夹
+			// 			}
+			// 		}
+			// 	]
+			// },
              {
                 test: /\.html$/,
                 use: [
@@ -77,7 +79,10 @@ module.exports = {
                 ]
             },
             {
-                test:  /\.scss$/,  
+                test:  /\.scss$/, 
+                // include: [
+                //     path.join(__dirname, 'client','styles')
+                // ],
                 exclude: [
                     path.resolve(__dirname, "node_modules")
                 ],
@@ -118,21 +123,26 @@ module.exports = {
     },
 
     plugins: [
+    //   new webpack.HotModuleReplacementPlugin(),  //产生hot-update.js文件
         // 调用之前先清除
-	    // new cleanWebpackPlugin(["build"]),
+	//   new cleanWebpackPlugin(["build"]),
       new ExtractTextPlugin('client/styles/index.css'),  // 分离css插件参数为提取出去的路径
-       new MiniCssExtractPlugin({
-        filename:'[name].css'
-       }),
+    //   new MiniCssExtractPlugin({
+    //     filename:'[name].css'
+    //    }),
+       		// 全局暴露统一入口
+		// new webpack.ProvidePlugin({
+		// 	$: "jquery"
+		// }),
        new HtmlWebpackPlugin({
            template:'./views/index.html',
            filename:'index.html',
            title:'测试',
            chunks:['index'],
-           inject: 'body'
+           inject: 'body',
        })
     ],
-    watch: true ,//这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
+    // watch: true ,//这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
 
      devServer: {
