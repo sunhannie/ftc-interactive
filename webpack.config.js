@@ -147,7 +147,7 @@ module.exports = {
 
      devServer: {
         host:'localhost',
-        port:3000,
+        port:3001,
         contentBase: path.resolve(__dirname, 'build'), // 设置服务器访问的基本目录
         historyApiFallback: true, // true for index.html upon 404, object for multiple paths
         hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
