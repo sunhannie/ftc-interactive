@@ -20,6 +20,13 @@ new WebpackDevServer(webpack(config), {
       timings: false,
       chunks: false,
       chunkModules: false
+    },
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Request-Headers':'X-Custom-Header',
+        'Access-Control-Max-Age': 1728000,
+        'Access-Control-Request-Method': 'GET,PUT,POST'
     }
 }).listen(3000, 'localhost', function (err) {
     if (err) {

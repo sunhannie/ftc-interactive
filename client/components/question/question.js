@@ -6,17 +6,22 @@ import questionCss from './question.scss';
 class Question extends Component {
   constructor(props) {
     super(props);
+    const { questions } = props; // eslint-disable-line
+
   }
 
+  
   render() {
 
     return (
-      <div class="overview-container">
-   
-        <div class="content">
+      <div className={`question`}>
+        <h2 className="o-typography-subhead--crosshead">
+          1.健康保险支出
+        </h2>
 
-
-        </div>
+        <p className="o-typography-lead--small">
+          你认为中国有多少百分比的国内生产总值（GDP）花在医疗保健支出上？
+        </p>
       </div>
     );
   }

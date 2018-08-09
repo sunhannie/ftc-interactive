@@ -24,7 +24,7 @@ class Overlay extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    // this.props.setQuestions(this.state.value);
+    this.props.setQuestions(this.state.value);
 
     this.modal.classList.add('animate-blur');
     this.modal.style.backgroundColor = 'rgba(51, 51, 51, 0)';
