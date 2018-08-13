@@ -210,57 +210,105 @@ div.input {
         height: 7px;
       }  
 
-      input[type=range]::-webkit-slider-thumb {
-        -webkit-appearance: none;/*清除系统默认样式*/
-        height: 26px;/*拖动块高度*/
-        width: 26px;/*拖动块宽度*/
-        background: #fff;/*拖动块背景*/
-        border-radius: 50%; /*外观设置为圆形*/
-        border: solid 1px #ddd; /*设置边框*/
-      }
-      output{
-        top: -32px;
-        z-index: 1;
-        margin-left: -7px;
-        border: 2px solid #74736c;
-        border-radius: 5px;
-        padding: 5px;
-        background-color: #fff;
-        text-align: center;
-        font-weight: 700;
-        left: 50%;
-        width: 40px;
-        position: absolute;
-        -webkit-transition: opacity linear .5s;
-        transition: opacity linear .5s;
-      }
-      output:before{
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        margin-left: -14px;
-        border-top: 14px solid #74736c;
-        border-left: 14px solid transparent;
-        border-right: 14px solid transparent;
-      }
+        input[type=range]::-webkit-slider-thumb {
+          -webkit-appearance: none;/*清除系统默认样式*/
+          height: 26px;/*拖动块高度*/
+          width: 26px;/*拖动块宽度*/
+          background: #fff;/*拖动块背景*/
+          border-radius: 50%; /*外观设置为圆形*/
+          border: solid 1px #ddd; /*设置边框*/
+        }
+        output{
+          top: -32px;
+          z-index: 1;
+          margin-left: -7px;
+          border: 2px solid #74736c;
+          border-radius: 5px;
+          padding: 5px;
+          background-color: #fff;
+          text-align: center;
+          font-weight: 700;
+          left: 50%;
+          width: 40px;
+          position: absolute;
+          -webkit-transition: opacity linear .5s;
+          transition: opacity linear .5s;
+        }
+        output:before{
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          margin-left: -14px;
+          border-top: 14px solid #74736c;
+          border-left: 14px solid transparent;
+          border-right: 14px solid transparent;
+        }
 
-      output:after {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        margin: -1px 0 0 -12px;
-        border-top: 12px solid #fff;
-        border-left: 12px solid transparent;
-        border-right: 12px solid transparent;
+        output:after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          margin: -1px 0 0 -12px;
+          border-top: 12px solid #fff;
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+      }
     }
+
+    .look-answer{
+        text-align: center;
+        button{
+              width: 40%;
+              padding: 8px 30px;
+              font-size: 20px;
+              margin: 10px;
+        }
     }
-   
+   .reslut-container{
+     .legend{
+       display: flex;
+       span{
+             vertical-align: middle;
+       }
+       .actual-situation{
+         width:33%;
+       }
+       .response{
+         width: 33%;
+       }
+       .survey{
+         width: 34%;
+       }
+       .circle{
+        display: inline-block;
+        width:15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: red;
+        margin-right: 5px;
+       }
+     }
+
+     .percentage{
+       display: flex;
+       .answer{
+         width:33%;
+       }
+       .thinking{
+         width: 33%;
+       }
+       .survey-people{
+         width: 34%;
+       }
+     }
+
+   }
 }
 
 
