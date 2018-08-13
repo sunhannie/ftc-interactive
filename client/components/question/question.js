@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-
+import Range from './range.js';
 import questionCss from './question.scss';
 class Question extends Component {
   constructor(props) {
     super(props);
-    const { questions } = props; // eslint-disable-line
-    this.handleChange = this.handleChange.bind(this);
+    const { questions } = this.props; // eslint-disable-line
+    // this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      answered: false,
+      value: '50',
+    };
   }
 
-  handleChange(value) {
-
-  }
+  // handleChange(value) { 
+  //   this.setState({ value: value });
+  //   console.log(value);
+  // }
   render() {
-
+     console.log(this.props);
+    const {props} = this.props;
+    const rangeMin = this.props.options[0];
+    const rangeMax = this.props.options[1];
     return (
       <div className="question-container">
         <h2 className="o-typography-subhead--crosshead">
@@ -22,20 +30,14 @@ class Question extends Component {
         </h2>
 
         <p className="o-typography-lead--small">
-          你认为中国有多少百分比的国内生产总值（GDP）花在医疗保健支出上？
+          {this.props.questionText}
         </p>
-        <div  class="input-section">
-          <form>
-            <div class="input-value">
-              <div class="left-value">0</div>
-              <div class="right-value">100</div>
-            </div>
-            <input type="range" step="1" min="0" max="100" value="50" onChange={event => this.handleChange(event.target.value)}/>
-            <output>50</output>
-          </form>
-          <div></div>
-        </div>
-        <div class="look-answer"><button>看答案</button> </div>
+        <Range 
+        min={rangeMin}
+        max={rangeMax}
+        step={rangeMax / 100}
+        thumbSize={28}/>
+
 
         <div class="reslut-container">
           <div class="legend">
@@ -45,9 +47,9 @@ class Question extends Component {
           </div>
 
           <div class="percentage">
-            <div class="answer"><span>答案是</span><span>6%</span></div>
-            <div class="thinking"><span>你认为是</span><span>52%</span></div>
-            <div class="survey-people"><span>调查民众答案</span><span>21%</span></div>
+            <div class="answer"><span>答案是</span><span>{this.props.answer}&#37;</span></div>
+            <div class="thinking"><span>你认为是</span><span>{this.state.value}</span></div>
+            <div class="survey-people"><span>调查民众答案</span><span>{this.props.countryAnswer}&#37;</span></div>
           </div>
         </div>
        </div>

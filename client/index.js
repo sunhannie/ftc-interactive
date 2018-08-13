@@ -51,12 +51,33 @@ class App extends React.Component {
       }));
   }
   render() {
-    console.log(this.state)
+    console.log(this.state.questions)
+
+    const questions = this.state.questions
+      .filter(question => question.answer !== '')
+      .sort((a, b) => Number(a.meta.qid.slice(1)) - Number(b.meta.qid.slice(1)))
+      .slice(2)
+      .map((question, i) => <Question 
+      key={question.meta.qid}
+      questionId={question.id}
+      questionIndex={i} 
+      questionType={question.meta.type}
+      questionText={question.text}
+      answer={Number(question.answer)}
+      countryAnswer={Number(question.meta.perceived)}
+      responsesData={question.responses}
+      options={Object.keys(question.options).map(option =>
+              question.options[option]
+            ).filter(option => option !== null)}
+      questions = {this.state.questions}/>
+    );
+
     return (
     	<div>
         <Overview />
-        {/*<Overlay setQuestions={this.setQuestions}/>*/}
-        <Question />
+        <Overlay setQuestions={this.setQuestions}/>
+        {/*<Question questions = {this.state.questions}/>*/}
+        {questions}
         {/*start
         <div><span>test</span></div>
         <button>提交1</button>*/}
