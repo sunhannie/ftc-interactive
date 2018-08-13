@@ -27,6 +27,7 @@
   "homepage": "https://github.com/sunhannie/ftc-interactive#readme",
   "dependencies": {
     "classnames": "^2.2.5",
+    "d3": "^3.5.17",
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
     "koa": "^2.5.1",
@@ -39,6 +40,7 @@
     "react": "^16.2.0",
     "react-css-modules": "^4.7.2",
     "react-dom": "^16.2.0",
+    "react-faux-dom": "^3.0.0",
     "react-immutable-render-mixin": "^0.9.7",
     "react-motion": "^0.5.2",
     "react-router": "^4.2.0",

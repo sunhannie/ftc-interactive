@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Range from './range.js';
+import ColumnChart from './column-chart/column-chart.js';
 import questionCss from './question.scss';
 class Question extends Component {
   constructor(props) {
@@ -14,16 +15,18 @@ class Question extends Component {
     };
   }
   markQuestion(event, value) {
-    // 加上preventDefault，不会跳转页面，即不会重新刷新页面
+    // 加上preventDefault，不会跳转页面，即不会重新刷新页面。action是表单提交的默认事件，在你的提交事件中，增加阻止默认事件的语句。
     if (event) {
       event.preventDefault();
     }
     console.log('value'+value);
-    // 运行此处后为什么还会重新刷新页面，为什么会加上问号
+    this.setState({
+        answered:true
+    });
   }
 
   render() {
-    //  console.log(this.props);
+     console.log('answered:'+this.container);
     const {props} = this.props;
     const rangeMin = this.props.options[0];
     const rangeMax = this.props.options[1];
@@ -40,9 +43,23 @@ class Question extends Component {
       28: '对婚前性行为的态度',
     };
     const crosshead = crossheadLookup[this.props.questionId];
+
+
+    const chart =  (
+      <ColumnChart
+        data={this.props.responsesData}
+        initialWidth={800}
+        inputMin={rangeMin}
+        inputMax={rangeMax}
+        userAnswer={this.state.value}
+        actualAnswer={this.props.answer}
+        countryAnswer={this.props.countryAnswer}
+      />
+    );
+
     return (
-      <div className="question-container">
-        <h2 className="o-typography-subhead--crosshead">
+      <div  className="question-container" >
+        <h2 className="o-typography-subhead--crosshead" ref={node => { this.container = node; }}>
           {this.props.questionIndex + 1}.{crosshead}
         </h2>
 
@@ -56,9 +73,10 @@ class Question extends Component {
         thumbSize={28}
         onSubmit={this.markQuestion}/>
 
+        {chart}
 
-
-        <div class="reslut-container">
+    {/*写法：变量字符串需要加上``，尽管前面有其它字符串*/}
+        <div class={`reslut-container  ${this.state.answered ? 'active' : 'notActive'} `}>
           <div class="legend">
             <div class="actual-situation"><span class="circle"></span><span>实际情况</span></div>
             <div class="response"><span class="circle"></span><span>你的回答</span></div>
