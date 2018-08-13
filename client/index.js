@@ -55,7 +55,7 @@ class App extends React.Component {
     return (
     	<div>
         <Overview />
-        <Overlay setQuestions={this.setQuestions}/>
+        {/*<Overlay setQuestions={this.setQuestions}/>*/}
         <Question />
         {/*start
         <div><span>test</span></div>

@@ -22,6 +22,15 @@ class Question extends Component {
         <p className="o-typography-lead--small">
           你认为中国有多少百分比的国内生产总值（GDP）花在医疗保健支出上？
         </p>
+        {/*<div className="tringle"></div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Projects</a>
+            <a href="#">About</a>
+        </nav>*/}
+
+
+
       </div>
     );
   }

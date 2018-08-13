@@ -187,3 +187,48 @@ div.input {
     height: 40px;
   }
 }
+
+.tringle{
+  width: 100px;
+  height: 200px;
+  background-color: yellow;
+  // border-top: none;
+  // border-right: 100px solid transparent;
+  // border-left: 100px solid red;
+  // border-bottom: 100px solid blue;
+  border-top: 100px solid transparent;
+  border-right: none;
+  border-left: 100px solid red;
+  border-bottom: 100px solid blue;
+  
+}
+.tringle:before{
+  content: '';
+  width:300px;
+  height: 100px;
+  background-color: navy;
+  transform-origin: 0 100%;
+}
+
+nav>a{
+    position: relative;
+    display: inline-block;
+    padding: .3em 1em 0;
+}
+nav>a::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: #ccc;
+    background-image: linear-gradient(hsla(0,0%,100%,.6),hsla(0,0%,100%,0));
+    border: 1px solid rgba(0,0,0,.4);
+    border-bottom: none;
+    border-radius: .5em .5em 0 0;
+    transform: perspective(.5em) rotateX(5deg);
+    transform-origin: bottom;
+}
+
