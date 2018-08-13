@@ -52,7 +52,7 @@ class App extends React.Component {
   }
   render() {
     console.log(this.state.questions)
-
+// 默认哪些没有激活，如果触发滚动就激活按钮，点击按钮显示下面图标，子动作把元素传给父
     const questions = this.state.questions
       .filter(question => question.answer !== '')
       .sort((a, b) => Number(a.meta.qid.slice(1)) - Number(b.meta.qid.slice(1)))
@@ -78,9 +78,7 @@ class App extends React.Component {
         <Overlay setQuestions={this.setQuestions}/>
         {/*<Question questions = {this.state.questions}/>*/}
         {questions}
-        {/*start
-        <div><span>test</span></div>
-        <button>提交1</button>*/}
+
       </div>
     );
   }

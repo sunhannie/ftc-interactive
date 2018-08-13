@@ -190,7 +190,13 @@ div.input {
 
 .question-container{
     width: 70%;
-    margin: 0 auto;
+    margin: 20px auto;
+    .o-typography-subhead--crosshead{
+          margin-bottom: 10px;
+    }
+    p{
+      margin-bottom: 40px;
+    }
     .input-section{
         position: relative;
         .input-value{
@@ -203,17 +209,18 @@ div.input {
           align-self: flex-end;
         }
       }
-      input{
+      input[type=range]{
         width: 100%;
         background-color: #d7d1de;
         -webkit-appearance: none;
         height: 7px;
+        outline: 0; //去除外框轮廓
       }  
 
         input[type=range]::-webkit-slider-thumb {
           -webkit-appearance: none;/*清除系统默认样式*/
-          height: 26px;/*拖动块高度*/
-          width: 26px;/*拖动块宽度*/
+          height: 28px;/*拖动块高度*/
+          width: 28px;/*拖动块宽度*/
           background: #fff;/*拖动块背景*/
           border-radius: 50%; /*外观设置为圆形*/
           border: solid 1px #ddd; /*设置边框*/
@@ -259,15 +266,29 @@ div.input {
           border-left: 12px solid transparent;
           border-right: 12px solid transparent;
       }
+
+      
     }
 
     .look-answer{
         text-align: center;
-        button{
+        button,input{
               width: 40%;
               padding: 8px 30px;
               font-size: 20px;
               margin: 10px;
+              background-color: #26747a;
+              border-color: #26747a;
+              color:white;
+        }
+        .notActive{
+          background-color: red;
+          
+        }
+        .o-buttons[disabled] {
+            pointer-events: none;
+            opacity: .4;
+            cursor: default;
         }
     }
    .reslut-container{
@@ -310,7 +331,10 @@ div.input {
 
    }
 }
-
+.hidden {
+  opacity: 0;
+  color: red;
+}
 
 
 
