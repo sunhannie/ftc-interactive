@@ -32,7 +32,7 @@ class Question extends Component {
   }
 
   render() {
-     console.log(this.props);
+     console.log({...this.props});
     const {props} = this.props;
     const rangeMin = this.props.options[0];
     const rangeMax = this.props.options[1];

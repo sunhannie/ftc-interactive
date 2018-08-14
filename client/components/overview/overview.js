@@ -11,9 +11,9 @@ class Overview extends Component {
   render() {
 
     return (
-      <div class="overview-container">
-        <div class="title">数据新闻</div>
-        <div class="content">
+      <div className="overview-container">
+        <div className="title">数据新闻</div>
+        <div className="content">
             <p>国际市场调查公司益普索-莫里（Ipsos-MORI）近期发布2016年认知偏差（Perils of Perception poll)年度报告，调查首度横跨40个国家和地区，探讨全球各地民众对社会状态的认识与真实情况的落差。</p>
 
             <p>调查显示，全球人民对国家社会的认知有待加强。我们一方面低估社会财富分配不均的基本事实（不平等的程度远超过人们的想像），另一方面又悲观的认为人们普遍不幸福（事实上自认幸福的比例仍是多数）。</p>

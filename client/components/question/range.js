@@ -72,7 +72,7 @@ class Range extends Component {
     // console.log(React.PropTypes);
     return (
 
-        <div  class="input-section">
+        <div  className="input-section">
           <form onSubmit={event => {
             this.setState({ disabled: true });
             this.props.onSubmit(event, this.state.value);
@@ -81,15 +81,15 @@ class Range extends Component {
             this.rangeLabels.classList.add('hidden');
             this.output.classList.add('hidden');
           }}>
-            <div class="input-value" ref={node => { this.rangeLabels = node; }}>
-              <div class="left-value">{rangeMin}</div>
-              <div class="right-value">{rangeMax}</div>
+            <div className="input-value" ref={node => { this.rangeLabels = node; }}>
+              <div className="left-value">{rangeMin}</div>
+              <div className="right-value">{rangeMax}</div>
             </div>
             <input ref={node => { this.rangeInput = node; }} type="range" step={this.props.step} min={rangeMin} max={rangeMax} value={this.state.value} onChange={event => this.handleChange(event.target.value)}/>
             <output ref={node => { this.output = node; }} style={{ left: this.state.rangeOverlayPosition }}>{this.state.value}</output>
 
 
-            <div class="look-answer">
+            <div className="look-answer">
                 <input
                 ref={node => { this.submitButton = node; }}
                 type="submit"

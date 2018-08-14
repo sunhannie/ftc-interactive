@@ -30,13 +30,18 @@ module.exports = {
         rules:[
              {
                 test: /\.js|\.jsx$/,
-                exclude: [
-                    path.resolve(__dirname, "node_modules")  // 不检查node_modules下的js文件
-                ],
-                loader: "babel-loader",
-                options: {
-                    presets: ['react','es2015']
-                },
+                exclude: /(node_modules|bower_components)/,
+                // loader: "babel-loader",
+                // options: {
+                //     presets: ['react','es2015']
+                // },
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['react','es2015','env'],
+                        plugins: [require('babel-plugin-transform-object-rest-spread')]  //关键假如此才能支持扩展运算符
+                    }
+                }
              },
              {
                 test: /\.css$/,

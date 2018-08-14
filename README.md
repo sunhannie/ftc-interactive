@@ -38,3 +38,6 @@ connect(
   mapDispatchToProps
 )(Question)
  export default Question;  
+
+
+ https://www.npmjs.com/package/babel-loader  (用法)
