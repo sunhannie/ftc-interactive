@@ -58,7 +58,7 @@ class Range extends Component {
     const width = this.rangeInput.offsetWidth;
     const increment = (width - this.props.thumbSize) / 100;
     const rangeOverlayPosition = (this.state.rangeProgress * increment) - 1;
-    console.log('rangeOverlayPosition');
+    // console.log('rangeOverlayPosition');
     this.setState({
       width,
       rangeOverlayPosition,

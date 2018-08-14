@@ -1,8 +1,10 @@
 const ADD_QUESTION = 'ADD_QUESTION';
+const MARK_QUESTION = 'MARK_QUESTION';
 
 // 对象怎么合并？写法上需要熟悉。抓取数据，dispatch动作
 export const reducer = (state, action) => {
 // export default  function (state, action){
+    console.log(action);
     if (!state) {
         
         state = { questions1: [14] }
@@ -17,6 +19,8 @@ export const reducer = (state, action) => {
     switch(action.type){
         case ADD_QUESTION:
             return {questions: [...state.questions, action.question1]}
+        case MARK_QUESTION:
+            return action.mark_question
         default:
         // let aClone = { ...{questions1: [14]} }; //对象和数组都是可以运行
         
@@ -28,10 +32,13 @@ export const reducer = (state, action) => {
                 'test':111,   
                 state   
             })
-            // return   state
     }
 }
 
 export const addQuestion = (question1) => {
     return { type: ADD_QUESTION, question1 }
+}
+
+export const markQuestion = (mark_question) => {
+    return { type: MARK_QUESTION, mark_question}
 }

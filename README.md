@@ -16,7 +16,25 @@ js文件可以直接引入，但是css文件需要借助ExtractTextPlugin
 
 增加场景，增加和删除问题
 
+## 写法问题
+```
 return ({
     state,   
     state   
 })  这样写仅仅获取一个state值
+```
+
+必须用写法一，会把mapStateToProps和mapDispatchToProps的属性合并进去。写法二不能
+
+写法一：
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Question)
+
+写法二：
+connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Question)
+ export default Question;  

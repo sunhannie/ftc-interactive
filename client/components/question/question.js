@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Range from './range.js';
 import ColumnChart from './column-chart/column-chart.js';
 import questionCss from './question.scss';
+import {connect} from 'react-redux'
+
 class Question extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class Question extends Component {
       value: '50',
     };
 
-    console.log(this.props)
+    // console.log(this.props)
   }
   markQuestion(event, value) {
     // 加上preventDefault，不会跳转页面，即不会重新刷新页面。action是表单提交的默认事件，在你的提交事件中，增加阻止默认事件的语句。
@@ -26,10 +28,11 @@ class Question extends Component {
         answered:true,
         value,
     });
+   
   }
 
   render() {
-    //  console.log('answered:'+this.container);
+     console.log(this.props);
     const {props} = this.props;
     const rangeMin = this.props.options[0];
     const rangeMax = this.props.options[1];
@@ -79,17 +82,17 @@ class Question extends Component {
         {chart}
 
     {/*写法：变量字符串需要加上``，尽管前面有其它字符串*/}
-        <div class={`reslut-container  ${this.state.answered ? 'active' : 'notActive'} `}>
-          <div class="legend">
-            <div class="actual-situation"><span class="circle"></span><span>实际情况</span></div>
-            <div class="response"><span class="circle"></span><span>你的回答</span></div>
-            <div class="survey"><span class="circle"></span><span>问卷调查结果</span></div>
+        <div className={`reslut-container  ${this.state.answered ? 'active' : 'notActive'} `}>
+          <div className="legend">
+            <div className="actual-situation"><span className="circle"></span><span>实际情况</span></div>
+            <div className="response"><span className="circle"></span><span>你的回答</span></div>
+            <div className="survey"><span className="circle"></span><span>问卷调查结果</span></div>
           </div>
 
-          <div class="percentage">
-            <div class="answer"><span>答案是</span><span>{this.props.answer}&#37;</span></div>
-            <div class="thinking"><span>你认为是</span><span>{this.state.value}</span></div>
-            <div class="survey-people"><span>调查民众答案</span><span>{this.props.countryAnswer}&#37;</span></div>
+          <div className="percentage">
+            <div className="answer"><span>答案是</span><span>{this.props.answer}&#37;</span></div>
+            <div className="thinking"><span>你认为是</span><span>{this.state.value}</span></div>
+            <div className="survey-people"><span>调查民众答案</span><span>{this.props.countryAnswer}&#37;</span></div>
           </div>
         </div>
        </div>
@@ -97,5 +100,23 @@ class Question extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    test:['test question','test1 result']
+  }
+}
 
-export default Question;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    markQuestion: (questions) => {
+      dispatch(markQuestion(questions))
+    }
+ 
+  }
+}
+// action和reducer只是定义接口，reducer是用来合state的。action中包含什么？必须这样写，会把mapStateToProps和mapDispatchToProps的属性合并进去，
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Question)
+// export default Question;  
