@@ -21,7 +21,8 @@ class Question extends Component {
     }
     console.log('value'+value);
     this.setState({
-        answered:true
+        answered:true,
+        value,
     });
   }
 

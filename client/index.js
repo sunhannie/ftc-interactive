@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import Overlay from './components/overlay/overlay.js';
 
 import Overview from './components/overview/overview.js';
 import Question from './components/question/question.js';
 
+import commentsReducer from './reducers/reducer'
+
+const store = createStore(commentsReducer);
 class App extends React.Component {
 
   constructor(props) {
@@ -85,6 +90,8 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App/>,
+  <Provider store={store}>
+  <App/>
+  </Provider>,
   document.getElementById('root')
 );
