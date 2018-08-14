@@ -15,3 +15,8 @@ js文件可以直接引入，但是css文件需要借助ExtractTextPlugin
 <div class={`reslut-container  ${`${this.state.answered}`=='true' ? 'active' : 'notActive'} `}>
 
 增加场景，增加和删除问题
+
+return ({
+    state,   
+    state   
+})  这样写仅仅获取一个state值

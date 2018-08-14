@@ -13,6 +13,8 @@ class Question extends Component {
       answered: false,
       value: '50',
     };
+
+    console.log(this.props)
   }
   markQuestion(event, value) {
     // 加上preventDefault，不会跳转页面，即不会重新刷新页面。action是表单提交的默认事件，在你的提交事件中，增加阻止默认事件的语句。
@@ -27,7 +29,7 @@ class Question extends Component {
   }
 
   render() {
-     console.log('answered:'+this.container);
+    //  console.log('answered:'+this.container);
     const {props} = this.props;
     const rangeMin = this.props.options[0];
     const rangeMax = this.props.options[1];

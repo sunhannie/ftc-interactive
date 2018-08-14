@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { Provider ,connect} from 'react-redux'
+
 
 import Overlay from './components/overlay/overlay.js';
 
 import Overview from './components/overview/overview.js';
 import Question from './components/question/question.js';
 
-import commentsReducer from './reducers/question'
+import {reducer,addQuestion} from './reducers/question'
 
-const store = createStore(commentsReducer);
+const store = createStore(reducer);
 class App extends React.Component {
 
   constructor(props) {
@@ -27,8 +28,14 @@ class App extends React.Component {
       country: null,
     };
     this.setQuestions = this.setQuestions.bind(this);
+    
   }
   setQuestions(value) {
+    
+   
+    
+    // this.props.addQuestion('comments');
+
     const key = value.toLowerCase().replace(/\s/g, '-');
     const data = '../client/data/china.json';
     // const data = 'http://www.ftchinese.com/ig/perils-of-perception/china.json';
@@ -54,9 +61,13 @@ class App extends React.Component {
           .slice(2)
           .length,
       }));
+
+       
   }
+  // store.getState()获取的是reducer中的值
   render() {
-    console.log(this.state.questions)
+    console.log(store.getState());
+
 // 默认哪些没有激活，如果触发滚动就激活按钮，点击按钮显示下面图标，子动作把元素传给父
     const questions = this.state.questions
       .filter(question => question.answer !== '')
@@ -80,7 +91,7 @@ class App extends React.Component {
     return (
     	<div>
         <Overview />
-        <Overlay setQuestions={this.setQuestions}/>
+        <Overlay setQuestions={this.setQuestions} questions1={this.props.questions1}/>
         {/*<Question questions = {this.state.questions}/>*/}
         {questions}
 
@@ -88,6 +99,27 @@ class App extends React.Component {
     );
   }
 }
+// mapStateToProps怎么能合并进去呢？
+// 注意写法：
+const mapStateToProps = (state) => {
+  return {
+    test:['test','test1']
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addQuestion: (questions) => {
+      dispatch(addQuestion(questions))
+    }
+ 
+  }
+}
+// action和reducer只是定义接口，reducer是用来合state的。action中包含什么？
+connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
 
 ReactDOM.render(
   <Provider store={store}>
