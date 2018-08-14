@@ -64,9 +64,9 @@ class App extends React.Component {
 
        
   }
-  // store.getState()获取的是reducer中的值
+  // store.getState()获取的是reducer中的值;this.state获取的是当前组件的值
   render() {
-    console.log(this.props);
+    console.log(this.state);
 
 // 默认哪些没有激活，如果触发滚动就激活按钮，点击按钮显示下面图标，子动作把元素传给父
     const questions = this.state.questions

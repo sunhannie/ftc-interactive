@@ -5,6 +5,7 @@ import Range from './range.js';
 import ColumnChart from './column-chart/column-chart.js';
 import questionCss from './question.scss';
 import {connect} from 'react-redux'
+import {markQuestion1} from '../../reducers/question'
 
 class Question extends Component {
   constructor(props) {
@@ -28,8 +29,17 @@ class Question extends Component {
         answered:true,
         value,
     });
-   
+    if (this.props.markQuestion1) {
+      console.log('test include markQuestion props');
+      this.props.markQuestion1({
+        answeredQ:this.state.answered,
+        valueQ:this.state.value
+      });
+    }
+    
   }
+
+
 
   render() {
      console.log({...this.props});
@@ -102,14 +112,15 @@ class Question extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    test:['test question','test1 result']
+    test:['test question','test1 result'],
+    mark_question_data:state.mark_question_data
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    markQuestion: (questions) => {
-      dispatch(markQuestion(questions))
+    markQuestion1: (questions) => {
+      dispatch(markQuestion1(questions))
     }
  
   }

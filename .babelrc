@@ -4,7 +4,7 @@
       "presets": ["env", "react"],
       "plugins": [
         "react-hot-loader/babel",
-        "transform-decorators-legacy",
+        "transform-decorators-legacy"
         
       ]
     },
@@ -12,7 +12,7 @@
       "presets": ["env", "react"],
       "plugins": [
         "react-hot-loader/babel",
-        "transform-decorators-legacy",
+        "transform-decorators-legacy"
        
       ]
     },
@@ -22,7 +22,7 @@
         "react"
       ],
       "plugins": [
-        "transform-decorators-legacy",
+        "transform-decorators-legacy"
        
       ]
     }

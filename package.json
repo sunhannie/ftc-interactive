@@ -27,7 +27,6 @@
   "homepage": "https://github.com/sunhannie/ftc-interactive#readme",
   "dependencies": {
     "babel-preset-env": "^1.7.0",
-    "babel-preset-latest": "^6.24.1",
     "classnames": "^2.2.5",
     "d3": "^3.5.17",
     "debug": "^3.1.0",
