@@ -1,3 +1,6 @@
+// 分析几种类型，这个有抓取数据（把抓取到的数据和本身带的props合并）；点击查询数据
+
+
 // action types
 const INIT_COMMENTS = 'INIT_COMMENTS'
 const ADD_COMMENT = 'ADD_COMMENT'

@@ -9,7 +9,7 @@ import Overlay from './components/overlay/overlay.js';
 import Overview from './components/overview/overview.js';
 import Question from './components/question/question.js';
 
-import commentsReducer from './reducers/reducer'
+import commentsReducer from './reducers/question'
 
 const store = createStore(commentsReducer);
 class App extends React.Component {
