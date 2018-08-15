@@ -72,6 +72,30 @@ export const rootReducer = combineReducers({
   requestReducer
 })
 
+
+function requestQuestion(value) {
+  
+    const key = value.toLowerCase().replace(/\s/g, '-');
+    const data = '../../client/data/china.json';
+    const init = {
+      method:  'GET',
+      headers:{ 
+        'Content-Type': 'text/plain',
+        'Accept': 'application/json',
+      },
+      mode: 'same-origin',
+      credentials: 'include',
+      redirect: 'error'
+    }
+
+      fetch(data,init)
+      .then(res => res.json())
+      .then(({ questions }) => {
+        console.log(questions);
+    });
+   
+  }
+
 export const addQuestion = (question1) => {
     return { type: ADD_QUESTION, question1 }
 }
@@ -90,4 +114,5 @@ export const fetchDataInGet = data => dispatch => {
     // return fetch('https://www.reddit.com/r/reactjs.json')
     // .then(response => response.json())
     // .then(json =>{console.log('json');} ) 
+    return requestQuestion('zzz');
 }

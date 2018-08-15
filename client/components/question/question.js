@@ -16,7 +16,7 @@ class Question extends Component {
       answered: false,
       value: '50',
     };
-    // this.props.dispatch(addCountAsync()); 怎么能包含dispatch呢？ 
+    
     // console.log(this.props)
   }
   markQuestion(event, value) {
@@ -38,37 +38,14 @@ class Question extends Component {
     }
     // this.props.requestGet('中国');
 
-    fetchDataInGet('中国');
+    
     // addCountAsync();
   }
 
-   requestQuestion(value) {
-  
-    const key = value.toLowerCase().replace(/\s/g, '-');
-    const data = '../../client/data/china.json';
-    const init = {
-      method:  'GET',
-      headers:{ 
-        'Content-Type': 'text/plain',
-        'Accept': 'application/json',
-      },
-      mode: 'same-origin',
-      credentials: 'include',
-      redirect: 'error'
-    }
 
-      fetch(data,init)
-      .then(res => res.json())
-      .then(({ questions }) => {
-        console.log(questions);
-    });
-
-
-      
-  }
 
  componentDidMount() {
-   
+    this.props.dispatch(fetchDataInGet('中国')); //怎么能包含dispatch呢？ 
     // const { dispatch, selectedSubreddit } = this.props;
     // dispatch(fetchPostsIfNeeded(selectedSubreddit))
     console.log({...this.props});  //props怎么会有dispatch
@@ -149,8 +126,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
+    dispatch,
     markQuestion1: (questions) => {
       dispatch(markQuestion1(questions))
     },

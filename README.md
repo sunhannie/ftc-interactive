@@ -56,7 +56,18 @@ connect(
 Redux Thunk中间件允许您编写返回函数而不是动作的动作创建者。thunk(坦克)可以用来延迟动作的调度，或者只有在满足一定条件下才可以调度。内部函数接收dispatch和getState作为参数。
 返回执行异步分派的函数的An action creator:
 返回执行条件分派的函数的An action creator:
-
+```
 store.dispatch(addCountAsync());  thunk需要通过store.dispatch触发
-
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    dispatch,  //加上dispatch，this.props.dispatch才不会报错
+    markQuestion1: (questions) => {
+      dispatch(markQuestion1(questions))
+    },
+    requestGet: (request_get_data) => {
+      dispatch(requestGet(request_get_data)) ; 
+    }
+  }
+}
+```
 内部函数的任何返回值都将作为分派本身的返回值可用。这对于编排一个异步控制流很方便，因为thunk action creator可以彼此调度，并返回承诺，等待对方的完成:
