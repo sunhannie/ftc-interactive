@@ -41,3 +41,8 @@ connect(
 
 
  https://www.npmjs.com/package/babel-loader  (用法)
+
+
+ dispatch(requestGet({
+        questionsLoaded: true,
+        questions})) ;  //直接写dispatch行不通

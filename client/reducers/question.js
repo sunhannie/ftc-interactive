@@ -19,7 +19,7 @@ export const reducer = (state, action) => {
     // let aClone = { ...{questions1: [14]} }; //对象和数组都是可以运行
     switch(action.type){
         case ADD_QUESTION:
-            return {questions: [...state.questions, action.question1]}
+            return {questions: [...state, action.question1]}
         case MARK_QUESTION:
         console.log(action.mark_question);//这里的值就是触发传过来的值，得到{answeredQ: false, valueQ: "50"}。我该怎么样把此处的值更新到页面中
             return {mark_question_data:action.mark_question}
@@ -38,6 +38,7 @@ export const reducer = (state, action) => {
 export const requestReducer = (state = { }, action) => {
   switch (action.type) {
     case REQUEST_GET:
+    console.log('action.request_get_data:'+action.request_get_data);
       return {
         ...state,
         request: 'request result'

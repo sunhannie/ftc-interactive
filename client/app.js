@@ -10,7 +10,7 @@ import Overlay from './components/overlay/overlay.js';
 import Overview from './components/overview/overview.js';
 import Question from './components/question/question.js';
 
-import {reducer,addQuestion} from './reducers/question'
+import {rootReducer,addQuestion,requestGet,markQuestion1} from './reducers/question'
 
 
 class App extends React.Component {
@@ -32,9 +32,6 @@ class App extends React.Component {
   }
   setQuestions(value) {
     
-   
-    
-    // this.props.addQuestion('comments');
 
     const key = value.toLowerCase().replace(/\s/g, '-');
     const data = '../client/data/china.json';
@@ -49,9 +46,22 @@ class App extends React.Component {
       credentials: 'include',
       redirect: 'error'
     }
-    fetch(data,init)
+    // fetch(data,init)
+    //   .then(res => res.json())
+    //   .then(({ questions }) => this.setState({
+    //     questionsLoaded: true,
+    //     questions,
+    //     country: value,
+    //     questionsLength: questions
+    //       .filter(question => question.answer !== '')
+    //       .sort((a, b) => Number(a.meta.qid.slice(1)) - Number(b.meta.qid.slice(1)))
+    //       .slice(2)
+    //       .length,
+    //   }));
+
+      fetch(data,init)
       .then(res => res.json())
-      .then(({ questions }) => this.setState({
+      .then(({ questions }) => {this.setState({
         questionsLoaded: true,
         questions,
         country: value,
@@ -60,9 +70,27 @@ class App extends React.Component {
           .sort((a, b) => Number(a.meta.qid.slice(1)) - Number(b.meta.qid.slice(1)))
           .slice(2)
           .length,
-      }));
+      });
 
-       
+      // 
+      if (this.props.requestGet) {
+        console.log('test include requestGet props'+this.state.questionsLoaded);
+        this.props.requestGet({
+          questionsG: questions,
+        });
+      }
+
+    });
+
+      // 写在外面this.state.questionsLoaded还是默认值，因为不能立马获取到setState值，需要后面加函数
+      if (this.props.addQuestion) {
+        console.log('test include one markQuestion props'+this.state.questionsLoaded);  
+        this.props.addQuestion({
+          answeredOtherQ:this.state.questions,
+          valueOtherQ:this.state.country
+        });
+      }
+      
   }
   // store.getState()获取的是reducer中的值;this.state获取的是当前组件的值
   render() {
@@ -111,8 +139,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addQuestion: (questions) => {
       dispatch(addQuestion(questions))
+    },
+    requestGet: (request_get_data) => {
+      dispatch(requestGet(request_get_data)) ; 
     }
- 
+    
   }
 }
 // action和reducer只是定义接口，reducer是用来合state的。action中包含什么？
