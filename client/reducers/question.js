@@ -1,6 +1,7 @@
 const ADD_QUESTION = 'ADD_QUESTION';
 const MARK_QUESTION = 'MARK_QUESTION';
 const REQUEST_GET = 'REQUEST_GET';
+const ADD_COUNT = 'ADD_COUNT';
 import { combineReducers } from 'redux'
 // 对象怎么合并？写法上需要熟悉。抓取数据，dispatch动作
 export const reducer = (state, action) => {
@@ -43,11 +44,25 @@ export const requestReducer = (state = { }, action) => {
         ...state,
         request: 'request result'
       }
+    case ADD_COUNT:
+        return {add_count:'add_count'}
     default:
       return state
   }
 }
 
+export function addCount() {
+    console.log('addCount execute');
+  return {type: ADD_COUNT}
+}
+ 
+export function addCountAsync() {
+  return dispatch => {
+    setTimeout( () => {
+      dispatch(addCount())
+    },2000)
+  }
+}
 
 // 结合起来，返回一对象
 export const rootReducer = combineReducers({
@@ -65,4 +80,12 @@ export const markQuestion1 = (mark_question) => {
 
 export const requestGet = (request_get_data) => {
     return { type: REQUEST_GET, request_get_data}
+}
+
+export const fetchDataInGet = data => dispatch => {
+    console.log('data'+data);
+    dispatch(requestGet(data))  
+    // return fetch('https://www.reddit.com/r/reactjs.json')
+    // .then(response => response.json())
+    // .then(json =>{console.log('json');} ) 
 }

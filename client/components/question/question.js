@@ -5,7 +5,7 @@ import Range from './range.js';
 import ColumnChart from './column-chart/column-chart.js';
 import questionCss from './question.scss';
 import {connect} from 'react-redux'
-import {markQuestion1} from '../../reducers/question'
+import {rootReducer,markQuestion1,requestGet,fetchDataInGet,addCountAsync} from '../../reducers/question'
 
 class Question extends Component {
   constructor(props) {
@@ -30,19 +30,51 @@ class Question extends Component {
         value,
     });
     if (this.props.markQuestion1) {
-      console.log('test include markQuestion props');
+      console.log('test include markQuestion1 props in question.js');
       this.props.markQuestion1({
         answeredQ:this.state.answered,
         valueQ:this.state.value
       });
     }
-    
+    // this.props.requestGet('中国');
+
+    fetchDataInGet('中国');
+    addCountAsync();
   }
 
+   requestQuestion(value) {
+  
+    const key = value.toLowerCase().replace(/\s/g, '-');
+    const data = '../../client/data/china.json';
+    const init = {
+      method:  'GET',
+      headers:{ 
+        'Content-Type': 'text/plain',
+        'Accept': 'application/json',
+      },
+      mode: 'same-origin',
+      credentials: 'include',
+      redirect: 'error'
+    }
+
+      fetch(data,init)
+      .then(res => res.json())
+      .then(({ questions }) => {
+        console.log(questions);
+    });
 
 
+      
+  }
+
+ componentDidMount() {
+    
+    // const { dispatch, selectedSubreddit } = this.props;
+    // dispatch(fetchPostsIfNeeded(selectedSubreddit))
+    console.log({...this.props});  //props怎么会有dispatch
+  }
   render() {
-     console.log({...this.props});
+     
     const {props} = this.props;
     const rangeMin = this.props.options[0];
     const rangeMax = this.props.options[1];
@@ -121,8 +153,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     markQuestion1: (questions) => {
       dispatch(markQuestion1(questions))
+    },
+    requestGet: (request_get_data) => {
+      dispatch(requestGet(request_get_data)) ; 
     }
- 
   }
 }
 // action和reducer只是定义接口，reducer是用来合state的。action中包含什么？必须这样写，会把mapStateToProps和mapDispatchToProps的属性合并进去，
