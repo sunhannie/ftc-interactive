@@ -1,6 +1,7 @@
 const ADD_QUESTION = 'ADD_QUESTION';
 const MARK_QUESTION = 'MARK_QUESTION';
-
+const REQUEST_GET = 'REQUEST_GET';
+import { combineReducers } from 'redux'
 // 对象怎么合并？写法上需要熟悉。抓取数据，dispatch动作
 export const reducer = (state, action) => {
 // export default  function (state, action){  //这样写可以不写函数名
@@ -33,10 +34,34 @@ export const reducer = (state, action) => {
     }
 }
 
+
+export const requestReducer = (state = { }, action) => {
+  switch (action.type) {
+    case REQUEST_GET:
+      return {
+        ...state,
+        request: 'request result'
+      }
+    default:
+      return state
+  }
+}
+
+
+// 结合起来，返回一对象
+export const rootReducer = combineReducers({
+  reducer,
+  requestReducer
+})
+
 export const addQuestion = (question1) => {
     return { type: ADD_QUESTION, question1 }
 }
 
 export const markQuestion1 = (mark_question) => {
     return { type: MARK_QUESTION, mark_question}
+}
+
+export const requestGet = (request_get_data) => {
+    return { type: REQUEST_GET, request_get_data}
 }
