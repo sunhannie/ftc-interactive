@@ -57,7 +57,9 @@ export function addCount() {
 }
  
 export function addCountAsync() {
-  return dispatch => {
+  console.log('addCountAsync execute');
+  return (dispatch,getState) => {
+    console.log('addCountAsync dispatch'); //触发在store.dipatch，这里才起作用（也就是thunk起作用）
     setTimeout( () => {
       dispatch(addCount())
     },2000)

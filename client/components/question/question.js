@@ -16,7 +16,7 @@ class Question extends Component {
       answered: false,
       value: '50',
     };
-
+    // this.props.dispatch(addCountAsync()); 怎么能包含dispatch呢？ 
     // console.log(this.props)
   }
   markQuestion(event, value) {
@@ -39,7 +39,7 @@ class Question extends Component {
     // this.props.requestGet('中国');
 
     fetchDataInGet('中国');
-    addCountAsync();
+    // addCountAsync();
   }
 
    requestQuestion(value) {
@@ -68,7 +68,7 @@ class Question extends Component {
   }
 
  componentDidMount() {
-    
+   
     // const { dispatch, selectedSubreddit } = this.props;
     // dispatch(fetchPostsIfNeeded(selectedSubreddit))
     console.log({...this.props});  //props怎么会有dispatch
