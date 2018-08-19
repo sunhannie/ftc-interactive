@@ -79,7 +79,7 @@ class Overlay extends Component {
 
                   <input
                     type="submit"
-                    value="开始测验"
+                    value="开始测验1"
                     className="o-buttons o-buttons--big o-buttons--standout"
                     disabled={this.state.inputsDisabled}
                   />

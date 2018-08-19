@@ -71,3 +71,10 @@ const mapDispatchToProps = (dispatch, props) => {
 }
 ```
 内部函数的任何返回值都将作为分派本身的返回值可用。这对于编排一个异步控制流很方便，因为thunk action creator可以彼此调度，并返回承诺，等待对方的完成:
+
+
+没有指定--content-base运行的是server.js同目录
+
+另一种iframe模式的操作的区别只在输入的网址：localhost:8080/webpack-dev-server/index.html
+
+https://blog.csdn.net/hahahhahahahha123456/article/details/80376955

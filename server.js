@@ -4,6 +4,8 @@ var config = require('./webpack.config');
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
+    inline:true,
+    contentBase: './build',
     hot: true,
     historyApiFallback: true,
     // It suppress error shown in console, so it has to be set to false.

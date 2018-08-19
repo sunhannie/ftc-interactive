@@ -14,16 +14,22 @@ const cleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = {
     mode: "development", 
     devtool: 'cheap-module-eval-source-map',
-    entry:
+    entry:  
+    // [
+    // 'webpack-dev-server/client?http://localhost:3000',
+    // 'webpack/hot/only-dev-server',
+    // 'react-hot-loader/patch'],
+    
     {
         'index':['./client/index.js','./client/styles/index.scss'],  //.js扩展名可以不加,scss可以一起打包到index文档。加上scss，ExtractTextPlugin才能生效
         'signup':['./client/scripts/signup.js'],
         // 'css':['./client/styles/index.scss'] 不能单独写scss文件
+    
     },
     output: {
         path: path.resolve(__dirname, 'build/'),  //这儿好像没起作用
         filename: '[name].js', //输出文件名，[name].js默认是main.js。如果指定则是指定名
-        // publicPath: '/build/', //这个一定得注意，不加此句，加上html找不到
+        publicPath: '', //publicPath: '/build/', 这个一定得注意，不加此句，加上html找不到。publicPath是配置webpack.dev.server的时候用的。如果没有publicPath，那这个路径就直接写成filename.js。热更新引入./build/signup.js就对了，这个build跟此有关
         chunkFilename: "[chunkhash].js"   //这个好像没起作用，应该研究用处和区别
     },
     module: {
@@ -144,7 +150,8 @@ module.exports = {
            title:'测试',
            chunks:['index'],
            inject: 'body',
-       })
+       }),
+       new webpack.HotModuleReplacementPlugin(),
     ],
     // watch: true ,//这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
