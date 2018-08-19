@@ -7,19 +7,15 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 // 清除目录等
 const cleanWebpackPlugin = require("clean-webpack-plugin");
 
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');  //用法进一步研究
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');  //用法进一步研究
 
 
 module.exports = {
     mode: "development", 
     devtool: 'cheap-module-eval-source-map',
-    entry:  
-    // [
-    // 'webpack-dev-server/client?http://localhost:3000',
-    // 'webpack/hot/only-dev-server',
-    // 'react-hot-loader/patch'],
-    
+    entry:      
     {
         'index':['./client/index.js','./client/styles/index.scss'],  //.js扩展名可以不加,scss可以一起打包到index文档。加上scss，ExtractTextPlugin才能生效
         'signup':['./client/scripts/signup.js'],
@@ -152,6 +148,7 @@ module.exports = {
            inject: 'body',
        }),
        new webpack.HotModuleReplacementPlugin(),
+       new OpenBrowserPlugin({ url: 'http://localhost:3000' })
     ],
     // watch: true ,//这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
@@ -159,7 +156,7 @@ module.exports = {
      devServer: {
         host:'localhost',
         port:3001,
-        contentBase: path.resolve(__dirname, 'build'), // 设置服务器访问的基本目录
+        contentBase: path.resolve(__dirname, ''), // 设置服务器访问的基本目录，跟publicPath一样（为什么还得查找）
         historyApiFallback: true, // true for index.html upon 404, object for multiple paths
         hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
         https: false, // true for self-signed, object for cert authority

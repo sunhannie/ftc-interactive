@@ -1,11 +1,16 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
+config.entry.signup.unshift("webpack-dev-server/client?http://localhost:3000/")
+config.entry.signup.unshift("webpack/hot/dev-server")
+
+config.entry.index.unshift("webpack-dev-server/client?http://localhost:3000/")
+config.entry.index.unshift("webpack/hot/dev-server")
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     inline:true,
-    contentBase: './build',
+    // contentBase: '/',
     hot: true,
     historyApiFallback: true,
     // It suppress error shown in console, so it has to be set to false.
