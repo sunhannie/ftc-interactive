@@ -69,7 +69,7 @@ class Question extends Component {
     };
     const crosshead = crossheadLookup[this.props.questionId];
 
-
+ 
     const chart =  (
       <ColumnChart
         data={this.props.responsesData}
