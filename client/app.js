@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux'
 
-
 import Overlay from './components/overlay/overlay.js';
 
 import Overview from './components/overview/overview.js';
