@@ -72,7 +72,7 @@ class Range extends Component {
     // console.log(React.PropTypes);
     return (
 
-        <div  className="input-section">
+        <div  className={`input-section  ${this.props.isShow ? 'notActive' : 'active'} `}>
           <form onSubmit={event => {
             this.setState({ disabled: true });
             this.props.onSubmit(event, this.state.value);

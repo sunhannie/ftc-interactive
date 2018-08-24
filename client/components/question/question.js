@@ -96,9 +96,11 @@ class Question extends Component {
         max={rangeMax}
         step={rangeMax / 100}
         thumbSize={28}
-        onSubmit={this.markQuestion}/>
+        onSubmit={this.markQuestion}
+        isShow = {this.state.answered}
+        />
 
-        {chart}
+        {/*{chart}*/}
 
     {/*写法：变量字符串需要加上``，尽管前面有其它字符串*/}
         <div className={`reslut-container  ${this.state.answered ? 'active' : 'notActive'} `}>
