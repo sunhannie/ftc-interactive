@@ -52,12 +52,10 @@ export const requestReducer = (state = { }, action) => {
 }
 
 export function addCount() {
-    console.log('addCount execute');
   return {type: ADD_COUNT}
 }
  
 export function addCountAsync() {
-  console.log('addCountAsync execute');
   return (dispatch,getState) => {
     console.log('addCountAsync dispatch'); //触发在store.dipatch，这里才起作用（也就是thunk起作用）
     setTimeout( () => {
