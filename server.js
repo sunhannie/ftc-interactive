@@ -7,6 +7,7 @@ config.entry.signup.unshift("webpack/hot/dev-server")
 config.entry.index.unshift("webpack-dev-server/client?http://localhost:3000/")
 config.entry.index.unshift("webpack/hot/dev-server")
 
+
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     inline:true,
